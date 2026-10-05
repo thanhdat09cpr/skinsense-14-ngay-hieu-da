@@ -46,7 +46,7 @@ export interface TileView {
   status: TileStatus;
   /** Human label for locked tiles: "Mở vào ngày mai" or "Mở vào dd/mm". */
   unlockLabel?: string;
-  /** Compact form for small tiles: "Ngày mai" or "dd/mm". */
+  /** Compact form that fits a phone tile: "Mai" (tomorrow) or "dd/mm". */
   unlockShort?: string;
 }
 
@@ -67,7 +67,7 @@ export function tileView(params: {
   return {
     status: "locked",
     unlockLabel: isTomorrow ? "Mở vào ngày mai" : `Mở vào ${formatDayMonth(unlockOn)}`,
-    unlockShort: isTomorrow ? "Ngày mai" : formatDayMonth(unlockOn),
+    unlockShort: isTomorrow ? "Mai" : formatDayMonth(unlockOn),
   };
 }
 

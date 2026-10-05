@@ -79,20 +79,21 @@ export async function drawShareCard(params: { done: number; total: number; headl
   });
 }
 
+/** Greedy wrap that never leaves one word alone on the last line ("...hiểu / da"). */
 function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
-  let line = "";
-  let cursorY = y;
+  const fits = (words: string[]) => ctx.measureText(words.join(" ")).width <= maxWidth;
+  const lines: string[][] = [[]];
   for (const word of text.split(" ")) {
-    const attempt = line ? `${line} ${word}` : word;
-    if (ctx.measureText(attempt).width > maxWidth && line) {
-      ctx.fillText(line, x, cursorY);
-      line = word;
-      cursorY += lineHeight;
-    } else {
-      line = attempt;
-    }
+    const line = lines[lines.length - 1];
+    if (line.length && !fits([...line, word])) lines.push([word]);
+    else line.push(word);
   }
-  if (line) ctx.fillText(line, x, cursorY);
+  const last = lines[lines.length - 1];
+  const previous = lines[lines.length - 2];
+  if (previous && last.length === 1 && previous.length > 2 && fits([previous[previous.length - 1], ...last])) {
+    last.unshift(previous.pop() as string);
+  }
+  lines.forEach((line, index) => ctx.fillText(line.join(" "), x, y + index * lineHeight));
 }
 
 /** Share the card on phones; download it elsewhere. Returns how it was delivered. */
