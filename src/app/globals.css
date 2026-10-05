@@ -1,26 +1,270 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/*
+  Campaign design tokens. Scoped to [data-campaign] so the landing can be dropped
+  into the main SkinSense site without leaking styles. Every text/background pair
+  below was checked for WCAG AA (4.5:1 text, 3:1 non-text).
+*/
+[data-campaign] {
+  color-scheme: light;
+  --paper: #f6f6f0;
+  --paper-raised: #fcfcf8;
+  --mint: #eef6f4;
+  --ink: #1f2e32;
+  --ink-strong: #205860;
+  --ink-soft: #3f5a60;
+  --accent: #0f766e; /* buttons, today tile, focus ring */
+  --accent-text: #0f766e; /* accent used as text on paper */
+  --on-accent: #ffffff;
+  --done: #2e9c94; /* completed stamp, never used for text */
+  --done-soft: #dcefeb;
+  --line: rgb(32 88 96 / 0.16);
+  --shadow-rgb: 32 88 96;
+  --grain-opacity: 0.05;
+  /* "Stage": the deep-teal colour block behind the hero, like the Skinnie poster. */
+  --stage: #205860;
+  --stage-raised: #2a6a72;
+  --on-stage: #f6f6f0;
+  --on-stage-soft: #cfe3e0;
+  --stage-line: rgb(246 246 240 / 0.2);
+  /*
+    Highlighter: the notebook's marker pen. Second colour, used only for
+    emphasis (marked words, the hero CTA, stickers), never for body text.
+  */
+  --highlight: #ffe45c;
+  --highlight-mark: #ffe45c;
+  --on-highlight: #1f2e32;
+  /* Bright jade for emphasis on the teal stage (5.0:1 on #205860). */
+  --accent-bright: #8edbd2;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  [data-campaign]:not([data-event="halloween"]) {
+    color-scheme: dark;
+    --paper: #0f2427;
+    --paper-raised: #142e32;
+    --mint: #173539;
+    --ink: #e6f2ef;
+    --ink-strong: #cfe9e4;
+    --ink-soft: #a9c7c2;
+    --accent: #48b0a8;
+    --accent-text: #6cc4bc;
+    --on-accent: #0f2427;
+    --done: #48b0a8;
+    --done-soft: #1d4044;
+    --line: rgb(207 233 228 / 0.14);
+    --shadow-rgb: 0 0 0;
+    --grain-opacity: 0.04;
+    --stage: #143a40;
+    --stage-raised: #1d4a51;
+    /* Light text sits on the mark in dark mode, so the mark becomes a tint. */
+    --highlight-mark: rgb(255 228 92 / 0.32);
   }
 }
 
+/* 20/10: rose accent for one day only. */
+[data-campaign][data-event="womens-day"] {
+  --accent: #b8455f;
+  --accent-text: #b8455f;
+  --highlight: #f7b6c6;
+  --highlight-mark: #f7b6c6;
+}
+@media (prefers-color-scheme: dark) {
+  [data-campaign][data-event="womens-day"] {
+    --accent: #e28ca0;
+    --accent-text: #e28ca0;
+    --highlight-mark: rgb(247 182 198 / 0.32);
+  }
+}
+
+/* 27/10 - 31/10: slightly darker paper, pumpkin accent. */
+[data-campaign][data-event="halloween"] {
+  --paper: #e8ecea;
+  --paper-raised: #f2f4f2;
+  --mint: #dfe6e3;
+  --accent: #9a4524;
+  --accent-text: #9a4524;
+  --stage: #1d2a2c;
+  --stage-raised: #2a3a3c;
+  --highlight: #f2a65a;
+  --highlight-mark: #f2a65a;
+}
+@media (prefers-color-scheme: dark) {
+  [data-campaign][data-event="halloween"] {
+    color-scheme: dark;
+    --paper: #121a1b;
+    --paper-raised: #1a2526;
+    --mint: #1f2c2d;
+    --ink: #e6f2ef;
+    --ink-strong: #cfe9e4;
+    --ink-soft: #a9c7c2;
+    --accent: #e0884f;
+    --accent-text: #e0884f;
+    --on-accent: #121a1b;
+    --done: #48b0a8;
+    --done-soft: #1d4044;
+    --line: rgb(207 233 228 / 0.14);
+    --shadow-rgb: 0 0 0;
+    --stage: #0b1314;
+    --stage-raised: #1a2526;
+    --highlight-mark: rgb(242 166 90 / 0.32);
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-mint: var(--mint);
+  --color-ink: var(--ink);
+  --color-ink-strong: var(--ink-strong);
+  --color-ink-soft: var(--ink-soft);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+  --color-done: var(--done);
+  --color-done-soft: var(--done-soft);
+  --color-line: var(--line);
+  --color-stage: var(--stage);
+  --color-stage-raised: var(--stage-raised);
+  --color-on-stage: var(--on-stage);
+  --color-on-stage-soft: var(--on-stage-soft);
+  --color-stage-line: var(--stage-line);
+  --color-highlight: var(--highlight);
+  --color-accent-bright: var(--accent-bright);
+  --color-on-highlight: var(--on-highlight);
+  --font-sans: var(--font-be-vietnam);
+  --font-mono: var(--font-jetbrains);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+[data-campaign] {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-be-vietnam), system-ui, sans-serif;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+
+/* Paper grain lives on a fixed, non-interactive layer (never on scrolling content). */
+[data-campaign]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Torn-calendar edge: a row of punched holes along the top of a sheet. */
+.perforated-top {
+  -webkit-mask:
+    radial-gradient(circle 7px at 50% 0, transparent 98%, #000) top / 26px 14px repeat-x,
+    linear-gradient(#000, #000) 0 14px / 100% calc(100% - 14px) no-repeat;
+  mask:
+    radial-gradient(circle 7px at 50% 0, transparent 98%, #000) top / 26px 14px repeat-x,
+    linear-gradient(#000, #000) 0 14px / 100% calc(100% - 14px) no-repeat;
+}
+
+/* Slogan tape: the track holds two copies of the text and slides by one copy. */
+@keyframes tape-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.tape-track {
+  animation: tape-slide 38s linear infinite;
+}
+
+.soft-shadow {
+  box-shadow:
+    0 1px 0 rgb(var(--shadow-rgb) / 0.06),
+    0 18px 40px -24px rgb(var(--shadow-rgb) / 0.35);
+}
+
+/* Ruler-style range input used by the diary sliders. */
+.ruler-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 44px;
+  background: transparent;
+  cursor: pointer;
+}
+.ruler-range:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+.ruler-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line);
+}
+.ruler-range::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line);
+}
+.ruler-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  margin-top: -12px;
+  border-radius: 999px;
+  background: var(--accent);
+  border: 4px solid var(--paper-raised);
+  box-shadow: 0 4px 12px rgb(var(--shadow-rgb) / 0.3);
+}
+.ruler-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--accent);
+  border: 4px solid var(--paper-raised);
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+  [data-campaign] {
+    background: #ffffff;
+    color: #1f2e32;
+  }
+  [data-campaign]::before {
+    display: none;
+  }
 }

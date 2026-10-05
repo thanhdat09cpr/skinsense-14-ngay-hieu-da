@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:apps-script": "node --test 'apps-script/test/*.test.mjs'"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
+    "motion": "^14.0.0",
     "next": "16.3.8",
     "react": "19.2.8",
     "react-dom": "19.2.8"
