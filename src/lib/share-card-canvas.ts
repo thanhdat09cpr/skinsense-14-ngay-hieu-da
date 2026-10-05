@@ -3,7 +3,7 @@
  * number, Skinnie) and shares it through the Web Share API, falling back to a
  * download when sharing files is not supported.
  */
-import { HASHTAG, PAGE_URL } from "./campaign-config";
+import { HASHTAG, PAGE_URL, asset } from "./campaign-config";
 
 const WIDTH = 1080;
 const HEIGHT = 1920;
@@ -62,7 +62,7 @@ export async function drawShareCard(params: { done: number; total: number; headl
   ctx.font = `700 64px ${font}`;
   wrapText(ctx, params.headline, 96, 960, WIDTH - 192, 82);
 
-  const skinnie = await loadImage("/skinnie/skinnie.png");
+  const skinnie = await loadImage(asset("/skinnie/skinnie.png"));
   const skinnieHeight = 620;
   const skinnieWidth = (skinnie.width / skinnie.height) * skinnieHeight;
   ctx.drawImage(skinnie, WIDTH - skinnieWidth - 70, 1130, skinnieWidth, skinnieHeight);

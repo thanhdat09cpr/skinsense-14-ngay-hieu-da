@@ -93,13 +93,12 @@ function template_(kind, length) {
 
 function emailHtml_(t, name, kind, email) {
   const hello = name ? 'Chào ' + escapeHtml_(name) + ',' : 'Chào bạn,';
-  const site = PAGE_URL.replace('/14-ngay-hieu-da', '');
   const paragraphs = t.lines.map(function (line) {
     return '<p style="margin:0 0 14px;font-size:16px;line-height:1.6;color:#3f5a60">' + escapeHtml_(line) + '</p>';
   }).join('');
   return '<div style="background:#f6f6f0;padding:24px 12px;font-family:Arial,Helvetica,sans-serif">'
     + '<div style="max-width:520px;margin:0 auto;background:#fcfcf8;border-radius:20px;padding:28px">'
-    + '<img src="' + site + '/skinnie/' + t.image + '" alt="Skinnie" width="120" style="display:block;margin:0 auto 12px">'
+    + '<img src="' + PAGE_URL + '/skinnie/' + t.image + '" alt="Skinnie" width="120" style="display:block;margin:0 auto 12px">'
     + '<p style="margin:0 0 6px;font-size:15px;color:#3f5a60">' + hello + '</p>'
     + '<h1 style="margin:0 0 16px;font-size:26px;line-height:1.2;color:#205860">' + escapeHtml_(t.title) + '</h1>'
     + paragraphs

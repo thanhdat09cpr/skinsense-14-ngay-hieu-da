@@ -7,6 +7,12 @@ export const SITE_URL = "https://skinsense-ai-coral.vercel.app";
 export const PAGE_PATH = "/14-ngay-hieu-da";
 export const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 
+/**
+ * Files in /public live under the basePath (next.config.ts), and next/image
+ * needs that prefix spelled out: always reference them through asset().
+ */
+export const asset = (path: string) => `${PAGE_PATH}${path}`;
+
 /** Apps Script web-app URL. While it is a placeholder, payloads go to the console. */
 export const SHEET_ENDPOINT = "DAN_URL_APPS_SCRIPT";
 /** Sent with every row; the Apps Script rejects rows without it. Filters stray bots, not a secret. */

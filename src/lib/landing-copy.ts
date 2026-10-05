@@ -1,3 +1,5 @@
+import { asset } from "./campaign-config";
+
 /**
  * Visible copy for the static sections. Voice: "SkinSense / tụi mình" talking
  * to "bạn", numbers over adjectives, no medical claims, no em dashes.
@@ -9,19 +11,19 @@ export const HOW_IT_WORKS = [
     marker: "Ngày 1",
     title: "Chụp một tấm ảnh làm mốc",
     body: "Cùng chỗ, cùng giờ, cùng ánh sáng. Chọn 1 đến 2 điều muốn theo dõi: dầu, mụn, đỏ da.",
-    image: { src: "/images/scene-phone-window.jpg", alt: "Điện thoại dựng cạnh cửa sổ trong nắng sớm", width: 1400, height: 1050 },
+    image: { src: asset("/images/scene-phone-window.jpg"), alt: "Điện thoại dựng cạnh cửa sổ trong nắng sớm", width: 1400, height: 1050 },
   },
   {
     marker: "Mỗi ngày",
     title: "Mở một ô, ghi 3 chỉ số",
     body: "Độ dầu, mụn, cảm giác da và một dòng ghi chú. Khoảng 30 giây.",
-    image: { src: "/images/scene-notebook-calendar.jpg", alt: "Cuốn sổ mở với lưới lịch 14 ô và bút dạ quang", width: 1400, height: 1050 },
+    image: { src: asset("/images/scene-notebook-calendar.jpg"), alt: "Cuốn sổ mở với lưới lịch 14 ô và bút dạ quang", width: 1400, height: 1050 },
   },
   {
     marker: "Ngày 7 và Ngày 14",
     title: "Nhìn lại làn da của chính bạn",
     body: "Biểu đồ của riêng bạn hiện ra, kèm thẻ hoàn thành để chia sẻ nếu muốn.",
-    image: { src: "/skinnie/skinnie-cheer.png", alt: "Skinnie giơ tay ăn mừng", width: 765, height: 900 },
+    image: { src: asset("/skinnie/skinnie-cheer.png"), alt: "Skinnie giơ tay ăn mừng", width: 765, height: 900 },
   },
 ] as const;
 

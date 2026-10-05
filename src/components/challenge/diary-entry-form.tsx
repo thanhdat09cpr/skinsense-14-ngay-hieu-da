@@ -13,6 +13,7 @@ import type { ProgramLength } from "@/lib/campaign-config";
 import { chipClass, inputClass, primaryButton } from "@/components/ui/button-styles";
 import { useChallenge } from "./challenge-provider";
 import { PhotoJournalPicker } from "./photo-journal-picker";
+import { SKINNIE } from "@/lib/skinnie-poses";
 import { RulerSlider } from "./ruler-slider";
 
 const NOTE_LIMIT = 140;
@@ -50,7 +51,7 @@ export function DiaryEntryForm({ day, programLength, editable, onSaved }: { day:
 
       {content.tip && (
         <div className="flex items-center gap-3 rounded-[20px] bg-mint px-4 py-3">
-          <Image src="/skinnie/skinnie.png" alt="" width={707} height={900} className="h-auto w-9 shrink-0" />
+          <Image src={SKINNIE.magnifier.src} alt="" width={SKINNIE.magnifier.width} height={SKINNIE.magnifier.height} className="h-auto w-9 shrink-0" />
           <p className="text-sm leading-relaxed text-ink-strong">
             <span className="font-semibold">Skinnie mách nhỏ:</span> {content.tip}
           </p>
