@@ -15,7 +15,7 @@ npm run build && npm run start
 
 | Thêm vào link | Tác dụng |
 |---|---|
-| `?today=2026-10-08` | Giả lập "hôm nay" là ngày bất kỳ (trang mở thử thách từ 06/10) |
+| `?today=2026-10-08` | Giả lập "hôm nay" là ngày bất kỳ (trang mở thử thách từ 05/10) |
 | `?demo=1` | Mở khóa cả 14 ô với dữ liệu minh họa, không lưu gì vào máy |
 | `?today=2026-10-20` | Xem ô và màu riêng ngày 20/10 |
 | `?demo=1&today=2026-10-28` | Xem chế độ Halloween |
@@ -38,7 +38,7 @@ Ví dụ: `http://localhost:3000/14-ngay-hieu-da?demo=1&today=2026-10-20`
 
 | Bắt đầu trong khoảng | Người dùng đi | Về đích muộn nhất |
 |---|---|---|
-| 06/10 - 17/10 | 14 ngày | 30/10 |
+| 05/10 - 17/10 | 14 ngày | 30/10 |
 | 18/10 - 24/10 | 7 ngày (bản rút gọn) | 30/10 |
 | Sau 24/10 | Đóng đợt, mời để lại email nhận tin | |
 

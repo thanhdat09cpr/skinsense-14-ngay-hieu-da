@@ -22,7 +22,7 @@ export const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
 
 export const CAMPAIGN_DATES = {
   /** First day anyone can press "Bắt đầu Ngày 1". */
-  opensOn: "2026-10-06",
+  opensOn: "2026-10-05",
   /** Last start date that still fits a full 14-day run before dataEnd. */
   fullProgramLastStart: "2026-10-17",
   /** Last start date for the 7-day short run. */
