@@ -90,13 +90,13 @@ body { width: 1080px; height: 1350px; background: var(--stage); color: var(--cre
 .pills .swipe { display: grid; place-items: center; width: 74px; height: 74px; margin-left: auto; padding: 0; background: var(--yellow); border-color: var(--yellow);
   color: var(--on-yellow); font-size: 38px; box-shadow: 0 5px 0 rgba(10, 38, 42, 0.38); }
 
-.qr-card { position: absolute; left: 72px; top: 432px; width: 460px; padding: 30px 30px 24px; border-radius: 28px; background: var(--cream);
+.qr-card { position: absolute; left: 72px; top: 428px; width: 548px; padding: 30px 30px 22px; border-radius: 28px; background: var(--cream);
   color: var(--ink-strong); text-align: center; box-shadow: 0 40px 80px rgba(5, 25, 28, 0.45); }
 .qr svg { display: block; width: 100%; height: auto; }
 .qr-card figcaption { margin-top: 18px; font-weight: 800; font-size: 32px; letter-spacing: -0.01em; }
-.url { position: absolute; left: 72px; top: 972px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 25px; color: var(--cream); }
-.close-pose { position: absolute; right: 60px; top: 410px; height: 560px; filter: drop-shadow(0 30px 34px rgba(5, 25, 28, 0.5)); }
-.deadline { position: absolute; left: 72px; right: 72px; top: 1046px; display: grid; grid-template-columns: 64px 1fr; gap: 0 22px; }
+.url { position: absolute; left: 72px; top: 1052px; font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 25px; color: var(--cream); }
+.close-pose { position: absolute; right: 50px; top: 470px; height: 500px; filter: drop-shadow(0 30px 34px rgba(5, 25, 28, 0.5)); }
+.deadline { position: absolute; left: 72px; right: 72px; top: 1112px; display: grid; grid-template-columns: 64px 1fr; gap: 0 22px; }
 .deadline i { grid-row: span 2; font-size: 60px; color: var(--yellow); }
 .deadline strong { font-weight: 800; font-size: 36px; line-height: 1.2; letter-spacing: -0.015em; }
 .deadline span { margin-top: 8px; font-weight: 500; font-size: 25px; line-height: 1.4; color: var(--cream-soft); }
