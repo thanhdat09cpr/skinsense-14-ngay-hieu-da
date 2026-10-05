@@ -69,10 +69,11 @@ src/components/challenge/               lịch, phiếu nhật ký, ảnh, biể
 src/components/landing/                 các phần của trang: hero, cách chơi, nhắc nhở, FAQ, popup...
 src/components/skinnie/                 Skinnie bay theo khi cuộn
 src/lib/                                cấu hình chiến dịch, luật ngày, lưu trữ, tracking, nội dung chữ
-public/skinnie/, public/images/         7 tư thế Skinnie, 2 ảnh minh họa
+public/skinnie/, public/images/         10 tư thế Skinnie, 2 ảnh minh họa
 public/brand/logo-mark.png              logo TẠM (cắt từ poster), cần thay bằng file gốc
 apps-script/                            backend Google Sheet + email, kèm bộ test giả lập
 docs/                                   design system, hướng dẫn cài Apps Script
+marketing/carousel/                     ảnh hướng dẫn tham gia cho Facebook (xem mục bên dưới)
 ```
 
 ## Ghép vào website thật (khoảng 10 phút, không chép code)
@@ -111,6 +112,23 @@ Việc riêng của website chính, nên làm luôn: sửa `metadataBase` đang 
 
 Lần sau sửa landing: chỉ cần push lên repo landing, Vercel tự deploy lại, website chính không phải làm gì.
 
+## Ảnh hướng dẫn tham gia (carousel Facebook)
+
+8 ảnh dọc 4:5 (2160x2700) trong `marketing/carousel/output/`: ảnh bìa, 6 bước, ảnh cuối có mã QR. Đăng theo thứ tự tên file. Caption nhớ có link trang, vì Bước 1 ghi "Mở link trong bài viết".
+
+Ảnh dựng bằng code từ màn hình thật của landing, chữ tiếng Việt luôn đúng dấu. Sửa giao diện hoặc chữ thì chạy lại:
+
+```bash
+npm run build && npm run start   # landing ở localhost:3000
+npm run carousel:shots           # chụp 6 màn hình + thẻ story vào marketing/carousel/shots/
+npm run carousel:render          # dựng 8 ảnh vào marketing/carousel/output/
+```
+
+- Sửa chữ trên ảnh: `marketing/carousel/carousel-slide-content.mjs`. Link, hashtag và hạn 17/10, 24/10 lấy thẳng từ `src/lib/campaign-config.ts`.
+- Mã QR trỏ tới `PAGE_URL` kèm `utm_source=facebook&utm_medium=carousel`, để GA4 đếm riêng lượt quét. Đổi link: `QR_URL=https://... npm run carousel:render`.
+- Bước 1 đến 4 đi đúng luồng thật; Bước 5, 6 dùng dữ liệu minh họa (`?demo=1`).
+- Cần mạng (font Google, icon Phosphor) và Chrome (đặt `CHROME_PATH` nếu Chrome không ở chỗ mặc định của macOS).
+
 ## Kiểm tra trước khi chạy thật
 
 - [ ] Thay `public/brand/logo-mark.png` bằng logo gốc, đối chiếu màu với 2 bài teaser
@@ -118,6 +136,7 @@ Lần sau sửa landing: chỉ cần push lên repo landing, Vercel tự deploy 
 - [ ] Điền `GA_MEASUREMENT_ID` (cùng mã GA4 với website chính), thấy sự kiện trong GA4 DebugView
 - [ ] Thử trên điện thoại thật: mở link từ TikTok/Facebook, bắt đầu Ngày 1, thêm ảnh, đăng ký nhắc
 - [ ] Ảnh xem trước khi chia sẻ link (Open Graph 1200x630): chưa làm
+- [ ] Trước khi đăng carousel: mở thử link trong mã QR (ảnh `08-bat-dau.png`), phải ra đúng landing
 - [ ] Link `/quyen-rieng-tu` trên website nhắc đến việc lưu nhật ký và ảnh trên máy người dùng
 
 ## Lệnh kiểm tra

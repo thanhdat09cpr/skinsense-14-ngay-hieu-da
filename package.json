@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:apps-script": "node --test 'apps-script/test/*.test.mjs'"
+    "test:apps-script": "node --test 'apps-script/test/*.test.mjs'",
+    "carousel:shots": "node marketing/carousel/capture-screens.mjs",
+    "carousel:render": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON marketing/carousel/render-carousel.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
@@ -23,6 +25,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.8",
+    "puppeteer-core": "^25.12.0",
+    "qrcode": "^1.5.4",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

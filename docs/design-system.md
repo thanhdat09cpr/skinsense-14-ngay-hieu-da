@@ -83,7 +83,7 @@ Library: `motion/react`. Every animation has a job; everything collapses under `
 - Companion, not salesperson: asks, never diagnoses; tips are only about how to observe.
 - Appears at key moments only: hero, flying guide (bubble auto-hides after 5.5s), tip boxes, Day 7 question, closing.
 - Treated as a sticker on paper: transparent PNG, soft drop shadow, never on a busy background.
-- Poses live in `public/skinnie/` (via `src/lib/skinnie-poses.ts`): wave (hero), flower (20/10 hero + tile), halloween (Halloween hero + tiles), point (flying guide, reminder), puzzled (Day 7), cheer (final day, how-it-works). Keep the chest flame mark, it is part of the character.
+- Poses live in `public/skinnie/` (page poses via `src/lib/skinnie-poses.ts`): point (hero, flying guide, reminder), magnifier `skinnie.png` (closing, early-access popup, Day 1 tip), flower (20/10 hero + tile), halloween (Halloween hero + tiles), puzzled (Day 7), cheer (final day, how-it-works), wave (welcome email). Carousel only: phone, writing, calendar. Keep the chest flame mark, it is part of the character.
 - Scene photos (`public/images/`): phone by window, notebook calendar. No people, no faces.
 
 ## 8. Anti-Patterns (Banned)
