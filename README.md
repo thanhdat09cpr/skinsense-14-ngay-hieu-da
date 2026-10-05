@@ -6,7 +6,7 @@ Trang chiến dịch "Đừng đoán da, hãy hiểu da" (04/10 - 31/10/2026). N
 
 ```bash
 npm install
-npm run dev          # http://localhost:3000/14-ngay-hieu-da
+npm run dev          # http://localhost:3000/14-ngay-hieu-da (địa chỉ gốc tự chuyển về đây)
 # hoặc bản giống production:
 npm run build && npm run start
 ```
@@ -64,7 +64,7 @@ Làm theo **[docs/apps-script-setup.md](docs/apps-script-setup.md)** (khoảng 1
 ## Cấu trúc thư mục
 
 ```
-src/app/(chien-dich)/14-ngay-hieu-da/   trang chiến dịch (layout riêng: font, màu, Skinnie, popup)
+src/app/                                trang chiến dịch (chạy dưới /14-ngay-hieu-da, xem next.config.ts)
 src/components/challenge/               lịch, phiếu nhật ký, ảnh, biểu đồ, khảo sát, form nhắc
 src/components/landing/                 các phần của trang: hero, cách chơi, nhắc nhở, FAQ, popup...
 src/components/skinnie/                 Skinnie bay theo khi cuộn
@@ -75,21 +75,47 @@ apps-script/                            backend Google Sheet + email, kèm bộ 
 docs/                                   design system, hướng dẫn cài Apps Script
 ```
 
-## Ghép vào website thật
+## Ghép vào website thật (khoảng 10 phút, không chép code)
 
-1. Chép `src/app/(chien-dich)/`, `src/components/`, `src/lib/`, `public/skinnie/`, `public/images/`, `public/brand/` sang repo website (giữ đúng đường dẫn, hoặc sửa alias `@/`).
-2. Chép phần CSS của chiến dịch trong `src/app/globals.css` sang CSS của website: các khối `[data-campaign]`, `@theme inline`, và 4 class `.perforated-top`, `.soft-shadow`, `.ruler-range`, `.tape-track` (kèm `@keyframes tape-slide`). **Cần Tailwind v4**; nếu website đang dùng Tailwind v3, báo lại để chuyển đổi.
-3. `npm i motion @phosphor-icons/react`.
-4. Điền `SHEET_ENDPOINT` và `GA_MEASUREMENT_ID` (cùng mã GA4 với website) trong `src/lib/campaign-config.ts`. Nếu website đã gắn GA4, bỏ `<GaScript />` trong layout chiến dịch.
-5. Sửa lỗi toàn site: `metadataBase` đang trỏ `http://localhost:3000`, đổi thành `https://skinsense-ai-coral.vercel.app`.
-6. Đổi thanh thông báo của site thành "#14NgayHieuDa đang diễn ra, tham gia miễn phí" trỏ về `/14-ngay-hieu-da`, thêm mục vào menu.
-7. `npm run build` không lỗi, rồi deploy.
+Landing là một app riêng chạy dưới đường dẫn `/14-ngay-hieu-da`. Website chính chỉ cần **chuyển tiếp** đường dẫn đó sang landing (Next.js gọi là [multi-zones](https://nextjs.org/docs/pages/guides/multi-zones)). Không chép thư mục, không đụng CSS hay Tailwind của website, hai bên deploy độc lập. Người dùng vẫn thấy địa chỉ `skinsense-ai-coral.vercel.app/14-ngay-hieu-da`, nên GA4 tính chung một website.
+
+**Bước 1. Deploy landing lên Vercel**
+- vercel.com → **Add New → Project** → import repo `skinsense-14-ngay-hieu-da` → Deploy (để nguyên mặc định).
+- Ghi lại địa chỉ Vercel cấp, ví dụ `https://skinsense-14-ngay-hieu-da.vercel.app`. Kiểm tra: mở `.../14-ngay-hieu-da` thấy trang.
+
+**Bước 2. Thêm 1 đoạn vào `next.config` của website chính**
+
+```js
+// next.config.js (hoặc .mjs / .ts) của website SkinSense
+const LANDING_URL = "https://skinsense-14-ngay-hieu-da.vercel.app"; // địa chỉ ở Bước 1
+
+const nextConfig = {
+  // ...giữ nguyên cấu hình đang có
+  async rewrites() {
+    return [
+      { source: "/14-ngay-hieu-da", destination: `${LANDING_URL}/14-ngay-hieu-da` },
+      { source: "/14-ngay-hieu-da/:path*", destination: `${LANDING_URL}/14-ngay-hieu-da/:path*` },
+    ];
+  },
+};
+```
+
+Nếu website đã có `rewrites()`, chỉ cần thêm 2 dòng `{ source: ... }` vào danh sách đang có. Website không được có sẵn trang hay thư mục `public/14-ngay-hieu-da` (sẽ chiếm mất đường dẫn).
+
+**Bước 3. Thêm đường vào trang trên website**
+- Thanh thông báo: "#14NgayHieuDa đang diễn ra, tham gia miễn phí", trỏ về `/14-ngay-hieu-da`. Thêm mục này vào menu.
+- Dùng thẻ `<a href="/14-ngay-hieu-da">` thường, **không dùng `<Link>`** của Next, vì đây là app khác.
+- Deploy website chính. Xong.
+
+Việc riêng của website chính, nên làm luôn: sửa `metadataBase` đang trỏ `http://localhost:3000` thành `https://skinsense-ai-coral.vercel.app` (lỗi ảnh xem trước khi chia sẻ link).
+
+Lần sau sửa landing: chỉ cần push lên repo landing, Vercel tự deploy lại, website chính không phải làm gì.
 
 ## Kiểm tra trước khi chạy thật
 
 - [ ] Thay `public/brand/logo-mark.png` bằng logo gốc, đối chiếu màu với 2 bài teaser
 - [ ] Điền `SHEET_ENDPOINT`, chạy `sendTestEmails` thấy đủ 3 email
-- [ ] Điền `GA_MEASUREMENT_ID`, thấy sự kiện trong GA4 DebugView
+- [ ] Điền `GA_MEASUREMENT_ID` (cùng mã GA4 với website chính), thấy sự kiện trong GA4 DebugView
 - [ ] Thử trên điện thoại thật: mở link từ TikTok/Facebook, bắt đầu Ngày 1, thêm ảnh, đăng ký nhắc
 - [ ] Ảnh xem trước khi chia sẻ link (Open Graph 1200x630): chưa làm
 - [ ] Link `/quyen-rieng-tu` trên website nhắc đến việc lưu nhật ký và ảnh trên máy người dùng

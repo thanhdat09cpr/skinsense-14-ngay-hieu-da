@@ -90,10 +90,6 @@ Library: `motion/react`. Every animation has a job; everything collapses under `
 
 AI-purple gradients, any gradient fill, Inter, three equal feature cards, emoji in UI, before/after photos, prices, "Mua ngay", medical wording (trị mụn, chẩn đoán, điều trị, chuẩn y khoa), pre-ticked consents, more than one marquee, scroll cues, decorative status dots.
 
-## 9. Porting into the main Next.js site
+## 9. Mounting on the main site (Next.js multi-zones)
 
-1. Copy `src/app/(chien-dich)/14-ngay-hieu-da/`, `src/components/`, `src/lib/`, `public/skinnie/`, `public/images/`.
-2. Merge the campaign CSS from `globals.css`: the `[data-campaign]` token blocks, the `@theme inline` entries, and the `.perforated-top`, `.soft-shadow`, `.ruler-range`, `.tape-track` classes with `@keyframes tape-slide` (requires Tailwind v4; tell the dev if the site is on v3).
-3. `npm i motion @phosphor-icons/react`.
-4. Set `SHEET_ENDPOINT` and `GA_MEASUREMENT_ID` in `src/lib/campaign-config.ts`; remove `GaScript` if the site already loads GA4.
-5. Fix the site-wide `metadataBase` (currently `localhost:3000` on the live site).
+The landing is its own Next.js app with `basePath: "/14-ngay-hieu-da"` (next.config.ts). Every public file goes through `asset()` in `src/lib/campaign-config.ts`, so all requests stay under the base path. The main site adds two `rewrites()` entries pointing `/14-ngay-hieu-da` and `/14-ngay-hieu-da/:path*` to the landing's Vercel URL, and links to it with a plain `<a>`. Verified locally against a stand-in main site: 29 requests, none outside the base path, no failures. Step-by-step for the team: README, "Ghép vào website thật".

@@ -33,7 +33,7 @@ Nhật ký và ảnh **không bao giờ** gửi lên đây.
    - Ai có quyền truy cập: **Bất kỳ ai**
    - Bấm Triển khai, sao chép **URL ứng dụng web** (dạng `https://script.google.com/macros/s/.../exec`).
 7. Dán URL vào `SHEET_ENDPOINT` trong `src/lib/campaign-config.ts`, build và deploy lại website.
-8. **Kiểm tra** (sau khi website đã deploy, vì ảnh Skinnie trong email lấy từ `skinsense-ai-coral.vercel.app/skinnie/`):
+8. **Kiểm tra** (sau khi website đã deploy, vì ảnh Skinnie trong email lấy từ `skinsense-ai-coral.vercel.app/14-ngay-hieu-da/skinnie/`):
    - Trong Apps Script, chạy hàm `sendTestEmails`: 3 email mẫu (chào mừng, Ngày 7, tổng kết) gửi vào hộp thư của bạn.
    - Trên trang thật, đăng ký nhắc với email của bạn: dòng mới xuất hiện ở `ThamGia` và có email chào mừng.
    - Mở link "Hủy nhận email" trong email: cột `huy_nhan_email` chuyển thành TRUE.
